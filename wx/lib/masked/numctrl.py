@@ -583,7 +583,7 @@ class NumCtrl(BaseMaskedTextCtrl, NumCtrlAccessorsMixin):
 
         self._integerWidth = init_args['integerWidth']
         if init_args['groupDigits']:
-            self._groupSpace = (self._integerWidth - 1) / 3
+            self._groupSpace = (self._integerWidth - 1) // 3
         else:
             self._groupSpace = 0
         intmask = '#{%d}' % (self._integerWidth + self._groupSpace)
@@ -697,7 +697,7 @@ class NumCtrl(BaseMaskedTextCtrl, NumCtrlAccessorsMixin):
                 self._groupDigits = kwargs['groupDigits']
 
             if self._groupDigits:
-                self._groupSpace = (self._integerWidth - 1) / 3
+                self._groupSpace = (self._integerWidth - 1) // 3
             else:
                 self._groupSpace = 0
 
@@ -1919,7 +1919,7 @@ if __name__ == '__main__':
             style = wx.DEFAULT_DIALOG_STYLE ):
             wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 
-            self.int_ctrl = NumCtrl(self, wx.NewId(), size=(55,20))
+            self.int_ctrl = NumCtrl(self, wx.ID_ANY, size=(55,20))
             self.OK = wx.Button( self, wx.ID_OK, "OK")
             self.Cancel = wx.Button( self, wx.ID_CANCEL, "Cancel")
 

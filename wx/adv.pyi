@@ -12,7 +12,7 @@
 # See: https://www.python.org/dev/peps/pep-0484/
 #      https://www.jetbrains.com/help/pycharm/2016.1/type-hinting-in-pycharm.html
 #
-# Copyright: (c) 2017 by Total Control Software
+# Copyright: (c) 2018 by Total Control Software
 # License:   wxWindows License
 #---------------------------------------------------------------------------
 
@@ -1332,7 +1332,9 @@ EVT_CALENDAR =                 wx.PyEventBinder( wxEVT_CALENDAR_DOUBLECLICKED, 1
 EVT_CALENDAR_SEL_CHANGED =     wx.PyEventBinder( wxEVT_CALENDAR_SEL_CHANGED, 1)
 EVT_CALENDAR_WEEKDAY_CLICKED = wx.PyEventBinder( wxEVT_CALENDAR_WEEKDAY_CLICKED, 1)
 EVT_CALENDAR_PAGE_CHANGED =    wx.PyEventBinder( wxEVT_CALENDAR_PAGE_CHANGED, 1)
+EVT_CALENDAR_WEEK_CLICKED =    wx.PyEventBinder( wxEVT_CALENDAR_WEEK_CLICKED, 1)
 
+# These are deprecated, will be removed later...
 EVT_CALENDAR_DAY =             wx.PyEventBinder( wxEVT_CALENDAR_DAY_CHANGED, 1)
 EVT_CALENDAR_MONTH =           wx.PyEventBinder( wxEVT_CALENDAR_MONTH_CHANGED, 1)
 EVT_CALENDAR_YEAR =            wx.PyEventBinder( wxEVT_CALENDAR_YEAR_CHANGED, 1)

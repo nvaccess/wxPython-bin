@@ -325,7 +325,8 @@ def getTokens(command):
                 tokens.append(args)
             tokenize.tokenize_loop(f.readline, eater)
         else:
-            tokens = list(tokenize.tokenize(f.readline))
+            for t in tokenize.tokenize(f.readline):
+                tokens.append(t)
     except tokenize.TokenError:
         # This is due to a premature EOF, which we expect since we are
         # feeding in fragments of Python code.
@@ -350,14 +351,14 @@ def getBaseObject(obj):
         # inspect.getargspec() complains that the object isn't a
         # Python function.
         try:
-            if obj.im_self is None:
+            if obj.__self__ is None:
                 # This is an unbound method so we do not drop self
                 # from the argspec, since an instance must be passed
                 # as the first arg.
                 dropSelf = 0
             else:
                 dropSelf = 1
-            obj = obj.im_func
+            obj = obj.__func__
         except AttributeError:
             dropSelf = 0
     elif inspect.isclass(obj):
@@ -371,7 +372,7 @@ def getBaseObject(obj):
     elif callable(obj):
         # Get the __call__ method instead.
         try:
-            obj = obj.__call__.im_func
+            obj = obj.__call__.__func__
             dropSelf = 1
         except AttributeError:
             dropSelf = 0
@@ -382,7 +383,7 @@ def getBaseObject(obj):
 def getConstructor(obj):
     """Return constructor for class object, or None if there isn't one."""
     try:
-        return obj.__init__.im_func
+        return obj.__init__.__func__
     except AttributeError:
         for base in obj.__bases__:
             constructor = getConstructor(base)

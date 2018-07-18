@@ -43,7 +43,7 @@ ColourChangedEventBase, EVT_COLOUR_CHANGED = newevent.NewEvent()
 class ColourChangedEvent(ColourChangedEventBase):
     """Adds GetColour()/GetValue() for compatibility with ColourPickerCtrl and colourselect"""
     def __init__(self, newColour):
-        super().__init__(newColour = newColour)
+        super(ColourChangedEvent, self).__init__(newColour = newColour)
 
     def GetColour(self):
         return self.newColour
@@ -125,8 +125,8 @@ class PyColourChooser(wx.Panel):
                      ] * NO_CUSTOM_COLOURS
     last_custom = 0
 
-    idADD_CUSTOM = wx.NewId()
-    idSCROLL     = wx.NewId()
+    idADD_CUSTOM = wx.NewIdRef()
+    idSCROLL     = wx.NewIdRef()
 
     def __init__(self, parent, id):
         """Creates an instance of the colour chooser. Note that it is best to
@@ -148,7 +148,7 @@ class PyColourChooser(wx.Panel):
         self.colour_boxs = [ ]
         colour_grid = wx.GridSizer(rows=6, cols=8, vgap=0, hgap=0)
         for name in self.colour_names:
-            new_id = wx.NewId()
+            new_id = wx.NewIdRef()
             box = pycolourbox.PyColourBox(self, new_id)
 
             box.GetColourBox().Bind(wx.EVT_LEFT_DOWN, lambda x, b=box: self.onBasicClick(x, b))
@@ -160,7 +160,7 @@ class PyColourChooser(wx.Panel):
         self.custom_boxs = [ ]
         custom_grid = wx.GridSizer(rows=2, cols=8, vgap=0, hgap=0)
         for wxcolour, slidepos in self.custom_colours:
-            new_id = wx.NewId()
+            new_id = wx.NewIdRef()
             custom = pycolourbox.PyColourBox(self, new_id)
 
             custom.GetColourBox().Bind(wx.EVT_LEFT_DOWN, lambda x, b=custom: self.onCustomClick(x, b))
@@ -569,7 +569,7 @@ def main():
 
     class CCTestDialog(wx.Dialog):
         def __init__(self, parent, initColour):
-            super().__init__(parent, title="Pick A Colo(u)r")
+            super(CCTestDialog, self).__init__(parent, title="Pick A Colo(u)r")
 
             sizer = wx.BoxSizer(wx.VERTICAL)
             self.chooser = PyColourChooser(self, wx.ID_ANY)
@@ -581,7 +581,7 @@ def main():
 
     class CCTestFrame(wx.Frame):
         def __init__(self):
-            super().__init__(None, -1, 'PyColourChooser Test')
+            super(CCTestFrame, self).__init__(None, -1, 'PyColourChooser Test')
             sizer = wx.BoxSizer(wx.VERTICAL)
 
             sizer.Add(wx.StaticText(self, label="CLICK ME"), 0, wx.CENTER)

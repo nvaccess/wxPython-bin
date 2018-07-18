@@ -804,10 +804,10 @@ class IntCtrl(wx.TextCtrl):
         Colors text with oob_color if current value exceeds bounds
         set for control.
         """
-        if not self.IsInBounds(value):
-            self.SetForegroundColour(self.__oob_color)
-        else:
+        if value is None or self.IsInBounds(value):
             self.SetForegroundColour(self.__default_color)
+        else:
+            self.SetForegroundColour(self.__oob_color)
         self.Refresh()
 
 
@@ -942,7 +942,7 @@ if __name__ == '__main__':
             style = wx.DEFAULT_DIALOG_STYLE ):
             wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 
-            self.int_ctrl = IntCtrl(self, wx.NewId(), size=(55,20))
+            self.int_ctrl = IntCtrl(self, wx.ID_ANY, size=(55,20))
             self.OK = wx.Button( self, wx.ID_OK, "OK")
             self.Cancel = wx.Button( self, wx.ID_CANCEL, "Cancel")
 

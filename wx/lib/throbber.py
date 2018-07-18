@@ -151,7 +151,7 @@ class Throbber(wx.Panel):
 
         self.SetClientSize((width, height))
 
-        timerID  = wx.NewId()
+        timerID  = wx.NewIdRef()
         self.timer = wx.Timer(self, timerID)
 
         self.Bind(EVT_UPDATE_THROBBER, self.Update)

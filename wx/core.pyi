@@ -12,7 +12,7 @@
 # See: https://www.python.org/dev/peps/pep-0484/
 #      https://www.jetbrains.com/help/pycharm/2016.1/type-hinting-in-pycharm.html
 #
-# Copyright: (c) 2017 by Total Control Software
+# Copyright: (c) 2018 by Total Control Software
 # License:   wxWindows License
 #---------------------------------------------------------------------------
 
@@ -1035,6 +1035,15 @@ class Object(object):
         This is the root class of many of the wxWidgets classes.
         """
 
+    def GetClassInfo(self):
+        """
+        GetClassInfo() -> ClassInfo
+        
+        This virtual function is redefined for every class that requires run-
+        time type information, when using the wxDECLARE_CLASS macro (or
+        similar).
+        """
+
     def GetRefData(self):
         """
         GetRefData() -> ObjectRefData
@@ -1092,9 +1101,80 @@ class Object(object):
         
         Deletes the C++ object this Python object is a proxy for.
         """
+    ClassInfo = property(None, None)
     ClassName = property(None, None)
     RefData = property(None, None)
 # end of class Object
+
+
+class ClassInfo(object):
+    """
+    This class stores meta-information about classes.
+    """
+
+    def CreateObject(self):
+        """
+        CreateObject() -> Object
+        
+        Creates an object of the appropriate kind.
+        """
+
+    def GetBaseClassName1(self):
+        """
+        GetBaseClassName1() -> Char
+        
+        Returns the name of the first base class (NULL if none).
+        """
+
+    def GetBaseClassName2(self):
+        """
+        GetBaseClassName2() -> Char
+        
+        Returns the name of the second base class (NULL if none).
+        """
+
+    def GetClassName(self):
+        """
+        GetClassName() -> Char
+        
+        Returns the string form of the class name.
+        """
+
+    def GetSize(self):
+        """
+        GetSize() -> int
+        
+        Returns the size of the class.
+        """
+
+    def IsDynamic(self):
+        """
+        IsDynamic() -> bool
+        
+        Returns true if this class info can create objects of the associated
+        class.
+        """
+
+    def IsKindOf(self, info):
+        """
+        IsKindOf(info) -> bool
+        
+        Returns true if this class is a kind of (inherits from) the given
+        class.
+        """
+
+    @staticmethod
+    def FindClass(className):
+        """
+        FindClass(className) -> ClassInfo
+        
+        Finds the wxClassInfo object for a class with the given name.
+        """
+    BaseClassName1 = property(None, None)
+    BaseClassName2 = property(None, None)
+    ClassName = property(None, None)
+    Size = property(None, None)
+# end of class ClassInfo
 
 #-- end-object --#
 #-- begin-clntdatactnr --#
@@ -2779,6 +2859,106 @@ class IdManager(object):
         """
 # end of class IdManager
 
+
+class WindowIDRef(object):
+    """
+    WindowIDRef()
+    WindowIDRef(id)
+    WindowIDRef(idref)
+    
+    A wxWindowIDRef object wraps an ID value and marks it as being in-use
+    until all references to that ID are gone.
+    """
+
+    def __init__(self, *args, **kw):
+        """
+        WindowIDRef()
+        WindowIDRef(id)
+        WindowIDRef(idref)
+        
+        A wxWindowIDRef object wraps an ID value and marks it as being in-use
+        until all references to that ID are gone.
+        """
+
+    def GetValue(self):
+        """
+        GetValue() -> int
+        
+        Get the ID value
+        """
+
+    def GetId(self):
+        """
+        GetId() -> int
+        
+        Alias for GetValue allowing the IDRef to be passed as the source
+        parameter to :meth:`wx.EvtHandler.Bind`.
+        """
+
+    def __int__(self):
+        """
+        __int__() -> int
+        
+        Alias for GetValue allowing the IDRef to be passed as the WindowID
+        parameter when creating widgets or etc.
+        """
+
+    def __eq__(self, id):
+        """
+        __eq__(id) -> bool
+        """
+
+    def __ne__(self, id):
+        """
+        __ne__(id) -> bool
+        """
+
+    def __lt__(self, id):
+        """
+        __lt__(id) -> bool
+        """
+
+    def __gt__(self, id):
+        """
+        __gt__(id) -> bool
+        """
+
+    def __le__(self, id):
+        """
+        __le__(id) -> bool
+        """
+
+    def __ge__(self, id):
+        """
+        __ge__(id) -> bool
+        """
+
+    def __repr__(self):
+        """
+        
+        """
+
+    def __hash__(self):
+        """
+        
+        """
+    Id = property(None, None)
+    Value = property(None, None)
+# end of class WindowIDRef
+
+
+def NewIdRef(count=1):
+    """
+    Reserves a new Window ID (or range of WindowIDs) and returns a 
+    :class:`wx.WindowIDRef` object (or list of them) that will help 
+    manage the reservation of that ID.
+    
+    This function is intended to be a drop-in replacement of the old 
+    and deprecated :func:`wx.NewId` function, with the added benefit 
+    that the ID should never conflict with an in-use ID or other IDs 
+    generated by this function.
+    """
+    pass
 #-- end-windowid --#
 #-- begin-platinfo --#
 OS_UNKNOWN = 0
@@ -12808,6 +12988,75 @@ class SVGFileDC(DC):
 # end of class SVGFileDC
 
 #-- end-dcsvg --#
+#-- begin-metafile --#
+
+class Metafile(Object):
+    """
+    Metafile(filename=EmptyString)
+    
+    A wxMetafile represents the MS Windows metafile object, so metafile
+    operations have no effect in X.
+    """
+
+    def __init__(self, filename=EmptyString):
+        """
+        Metafile(filename=EmptyString)
+        
+        A wxMetafile represents the MS Windows metafile object, so metafile
+        operations have no effect in X.
+        """
+
+    def IsOk(self):
+        """
+        IsOk() -> bool
+        
+        Returns true if the metafile is valid.
+        """
+
+    def Play(self, dc):
+        """
+        Play(dc) -> bool
+        
+        Plays the metafile into the given device context, returning true if
+        successful.
+        """
+
+    def SetClipboard(self, width=0, height=0):
+        """
+        SetClipboard(width=0, height=0) -> bool
+        
+        Passes the metafile data to the clipboard.
+        """
+# end of class Metafile
+
+
+class MetafileDC(DC):
+    """
+    MetafileDC(filename=EmptyString)
+    
+    This is a type of device context that allows a metafile object to be
+    created (Windows only), and has most of the characteristics of a
+    normal wxDC.
+    """
+
+    def __init__(self, filename=EmptyString):
+        """
+        MetafileDC(filename=EmptyString)
+        
+        This is a type of device context that allows a metafile object to be
+        created (Windows only), and has most of the characteristics of a
+        normal wxDC.
+        """
+
+    def Close(self):
+        """
+        Close() -> Metafile
+        
+        This must be called after the device context is finished with.
+        """
+# end of class MetafileDC
+
+#-- end-metafile --#
 #-- begin-graphics --#
 ANTIALIAS_NONE = 0
 ANTIALIAS_DEFAULT = 0
@@ -12950,8 +13199,10 @@ class GraphicsContext(GraphicsObject):
         Create(windowDC) -> GraphicsContext
         Create(memoryDC) -> GraphicsContext
         Create(printerDC) -> GraphicsContext
+        Create(metaFileDC) -> GraphicsContext
         Create(image) -> GraphicsContext
         Create() -> GraphicsContext
+        Create(autoPaintDC) -> GraphicsContext
         
         Creates a wxGraphicsContext from a wxWindow.
         """
@@ -21351,6 +21602,11 @@ class Sizer(Object):
                 doSomething()
         """
 
+    def __iter__(self):
+        """
+        A Py convenience method that allows Sizers to act as iterables that will yield their wx.SizerItems.
+        """
+
     __bool__ = __nonzero__
     Children = property(None, None)
     ContainingWindow = property(None, None)
@@ -27309,7 +27565,7 @@ class ScrolledCanvas(Window, Scrolled):
 class ScrolledWindow(Window, Scrolled):
     """
     ScrolledWindow()
-    ScrolledWindow(parent, winid=ID_ANY, pos=DefaultPosition, size=DefaultSize, style=ScrolledWindowStyle, name=PanelNameStr)
+    ScrolledWindow(parent, id=ID_ANY, pos=DefaultPosition, size=DefaultSize, style=ScrolledWindowStyle, name=PanelNameStr)
     
     Scrolled window derived from wxPanel.
     """
@@ -27317,7 +27573,7 @@ class ScrolledWindow(Window, Scrolled):
     def __init__(self, *args, **kw):
         """
         ScrolledWindow()
-        ScrolledWindow(parent, winid=ID_ANY, pos=DefaultPosition, size=DefaultSize, style=ScrolledWindowStyle, name=PanelNameStr)
+        ScrolledWindow(parent, id=ID_ANY, pos=DefaultPosition, size=DefaultSize, style=ScrolledWindowStyle, name=PanelNameStr)
         
         Scrolled window derived from wxPanel.
         """
@@ -29330,6 +29586,18 @@ class BookCtrlBase(Control, WithImages):
         Returns the index of the tab at the specified position or wxNOT_FOUND
         if none.
         """
+
+    def _checkBookPageCount(f):
+        import functools
+        @functools.wraps(f)
+        def wrapper(self, page):
+            if page >= self.GetPageCount():
+                raise wx.PyAssertionError("invalid notebook page")
+            return f(self, page)
+        return wrapper
+    
+    RemovePage = _checkBookPageCount(RemovePage)
+    GetPage = _checkBookPageCount(GetPage)
     CurrentPage = property(None, None)
     PageCount = property(None, None)
     Selection = property(None, None)
@@ -29999,13 +30267,29 @@ class TextCompleterSimple(TextCompleter):
     A simpler base class for custom completer objects.
     """
 
-    def GetCompletions(self, prefix, res):
+    def GetCompletions(self, prefix):
         """
-        GetCompletions(prefix, res)
+        GetCompletions(prefix) -> res
         
         Pure virtual method returning all possible completions for the given
         prefix.
         """
+
+    def Start(self, prefix):
+        """
+        Start(prefix) -> bool
+        
+        Function called to start iteration over the completions for the given
+        prefix.
+        """
+
+    def GetNext(self):
+        """
+        GetNext() -> String
+        
+        Called to retrieve the next completion.
+        """
+    Next = property(None, None)
 # end of class TextCompleterSimple
 
 #-- end-textcompleter --#
@@ -42538,6 +42822,33 @@ def GetPasswordFromUser(message, caption=GetPasswordFromUserPromptStr, default_v
     """
 #-- end-textdlg --#
 #-- begin-numdlg --#
+
+class NumberEntryDialog(Dialog):
+    """
+    NumberEntryDialog(parent, message, prompt, caption, value, min, max, pos=DefaultPosition)
+    
+    This class represents a dialog that requests a numeric input from the
+    user.
+    """
+
+    def __init__(self, parent, message, prompt, caption, value, min, max, pos=DefaultPosition):
+        """
+        NumberEntryDialog(parent, message, prompt, caption, value, min, max, pos=DefaultPosition)
+        
+        This class represents a dialog that requests a numeric input from the
+        user.
+        """
+
+    def GetValue(self):
+        """
+        GetValue() -> long
+        
+        Returns the value that the user has entered if the user has pressed
+        OK, or the original value if the user has pressed Cancel.
+        """
+    Value = property(None, None)
+# end of class NumberEntryDialog
+
 
 def GetNumberFromUser(message, prompt, caption, value, min=0, max=100, parent=None, pos=DefaultPosition):
     """

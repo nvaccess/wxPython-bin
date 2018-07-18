@@ -12,7 +12,7 @@
 # See: https://www.python.org/dev/peps/pep-0484/
 #      https://www.jetbrains.com/help/pycharm/2016.1/type-hinting-in-pycharm.html
 #
-# Copyright: (c) 2017 by Total Control Software
+# Copyright: (c) 2018 by Total Control Software
 # License:   wxWindows License
 #---------------------------------------------------------------------------
 
@@ -5403,9 +5403,9 @@ class StringProperty(PGProperty):
         Converts property value into a text representation.
         """
 
-    def StringToValue(self, variant, text, argFlags=0):
+    def StringToValue(self, text, argFlags=0):
         """
-        StringToValue(variant, text, argFlags=0) -> bool
+        StringToValue(text, argFlags=0) -> (bool, variant)
         
         Converts text into wxVariant value appropriate for this property.
         """
@@ -5477,9 +5477,9 @@ class IntProperty(PGProperty):
         Converts property value into a text representation.
         """
 
-    def StringToValue(self, variant, text, argFlags=0):
+    def StringToValue(self, text, argFlags=0):
         """
-        StringToValue(variant, text, argFlags=0) -> bool
+        StringToValue(text, argFlags=0) -> (bool, variant)
         
         Converts text into wxVariant value appropriate for this property.
         """
@@ -5491,9 +5491,9 @@ class IntProperty(PGProperty):
         Implement this function in derived class to check the value.
         """
 
-    def IntToValue(self, variant, number, argFlags=0):
+    def IntToValue(self, number, argFlags=0):
         """
-        IntToValue(variant, number, argFlags=0) -> bool
+        IntToValue(number, argFlags=0) -> (bool, variant)
         
         Converts integer (possibly a choice selection) into wxVariant value
         appropriate for this property.
@@ -5546,9 +5546,9 @@ class UIntProperty(PGProperty):
         Converts property value into a text representation.
         """
 
-    def StringToValue(self, variant, text, argFlags=0):
+    def StringToValue(self, text, argFlags=0):
         """
-        StringToValue(variant, text, argFlags=0) -> bool
+        StringToValue(text, argFlags=0) -> (bool, variant)
         
         Converts text into wxVariant value appropriate for this property.
         """
@@ -5576,9 +5576,9 @@ class UIntProperty(PGProperty):
         of this property (NULL for no validator).
         """
 
-    def IntToValue(self, variant, number, argFlags=0):
+    def IntToValue(self, number, argFlags=0):
         """
-        IntToValue(variant, number, argFlags=0) -> bool
+        IntToValue(number, argFlags=0) -> (bool, variant)
         
         Converts integer (possibly a choice selection) into wxVariant value
         appropriate for this property.
@@ -5607,9 +5607,9 @@ class FloatProperty(PGProperty):
         Converts property value into a text representation.
         """
 
-    def StringToValue(self, variant, text, argFlags=0):
+    def StringToValue(self, text, argFlags=0):
         """
-        StringToValue(variant, text, argFlags=0) -> bool
+        StringToValue(text, argFlags=0) -> (bool, variant)
         
         Converts text into wxVariant value appropriate for this property.
         """
@@ -5681,16 +5681,16 @@ class BoolProperty(PGProperty):
         Converts property value into a text representation.
         """
 
-    def StringToValue(self, variant, text, argFlags=0):
+    def StringToValue(self, text, argFlags=0):
         """
-        StringToValue(variant, text, argFlags=0) -> bool
+        StringToValue(text, argFlags=0) -> (bool, variant)
         
         Converts text into wxVariant value appropriate for this property.
         """
 
-    def IntToValue(self, variant, number, argFlags=0):
+    def IntToValue(self, number, argFlags=0):
         """
-        IntToValue(variant, number, argFlags=0) -> bool
+        IntToValue(number, argFlags=0) -> (bool, variant)
         
         Converts integer (possibly a choice selection) into wxVariant value
         appropriate for this property.
@@ -5741,9 +5741,9 @@ class EnumProperty(PGProperty):
         Converts property value into a text representation.
         """
 
-    def StringToValue(self, variant, text, argFlags=0):
+    def StringToValue(self, text, argFlags=0):
         """
-        StringToValue(variant, text, argFlags=0) -> bool
+        StringToValue(text, argFlags=0) -> (bool, variant)
         
         Converts text into wxVariant value appropriate for this property.
         """
@@ -5755,9 +5755,9 @@ class EnumProperty(PGProperty):
         Implement this function in derived class to check the value.
         """
 
-    def IntToValue(self, variant, number, argFlags=0):
+    def IntToValue(self, number, argFlags=0):
         """
-        IntToValue(variant, number, argFlags=0) -> bool
+        IntToValue(number, argFlags=0) -> (bool, variant)
         
         Converts integer (possibly a choice selection) into wxVariant value
         appropriate for this property.
@@ -5834,9 +5834,9 @@ class FlagsProperty(PGProperty):
         Converts property value into a text representation.
         """
 
-    def StringToValue(self, variant, text, argFlags):
+    def StringToValue(self, text, argFlags):
         """
-        StringToValue(variant, text, argFlags) -> bool
+        StringToValue(text, argFlags) -> (bool, variant)
         
         Converts text into wxVariant value appropriate for this property.
         """
@@ -5926,9 +5926,9 @@ class FileProperty(PGProperty):
         Converts property value into a text representation.
         """
 
-    def StringToValue(self, variant, text, argFlags=0):
+    def StringToValue(self, text, argFlags=0):
         """
-        StringToValue(variant, text, argFlags=0) -> bool
+        StringToValue(text, argFlags=0) -> (bool, variant)
         
         Converts text into wxVariant value appropriate for this property.
         """
@@ -6010,9 +6010,9 @@ class LongStringProperty(PGProperty):
         Converts property value into a text representation.
         """
 
-    def StringToValue(self, variant, text, argFlags=0):
+    def StringToValue(self, text, argFlags=0):
         """
-        StringToValue(variant, text, argFlags=0) -> bool
+        StringToValue(text, argFlags=0) -> (bool, variant)
         
         Converts text into wxVariant value appropriate for this property.
         """
@@ -6106,9 +6106,9 @@ class ArrayStringProperty(PGProperty):
         Converts property value into a text representation.
         """
 
-    def StringToValue(self, variant, text, argFlags=0):
+    def StringToValue(self, text, argFlags=0):
         """
-        StringToValue(variant, text, argFlags=0) -> bool
+        StringToValue(text, argFlags=0) -> (bool, variant)
         
         Converts text into wxVariant value appropriate for this property.
         """
@@ -6448,9 +6448,9 @@ class SystemColourProperty(EnumProperty):
         This virtual function is called after m_value has been set.
         """
 
-    def IntToValue(self, variant, number, argFlags=0):
+    def IntToValue(self, number, argFlags=0):
         """
-        IntToValue(variant, number, argFlags=0) -> bool
+        IntToValue(number, argFlags=0) -> (bool, variant)
         
         Converts integer (possibly a choice selection) into wxVariant value
         appropriate for this property.
@@ -6479,9 +6479,9 @@ class SystemColourProperty(EnumProperty):
         Converts property value into a text representation.
         """
 
-    def StringToValue(self, variant, text, argFlags=0):
+    def StringToValue(self, text, argFlags=0):
         """
-        StringToValue(variant, text, argFlags=0) -> bool
+        StringToValue(text, argFlags=0) -> (bool, variant)
         
         Converts text into wxVariant value appropriate for this property.
         """
@@ -6667,9 +6667,9 @@ class MultiChoiceProperty(PGProperty):
         Converts property value into a text representation.
         """
 
-    def StringToValue(self, variant, text, argFlags=0):
+    def StringToValue(self, text, argFlags=0):
         """
-        StringToValue(variant, text, argFlags=0) -> bool
+        StringToValue(text, argFlags=0) -> (bool, variant)
         
         Converts text into wxVariant value appropriate for this property.
         """
@@ -6717,9 +6717,9 @@ class DateProperty(PGProperty):
         Converts property value into a text representation.
         """
 
-    def StringToValue(self, variant, text, argFlags=0):
+    def StringToValue(self, text, argFlags=0):
         """
-        StringToValue(variant, text, argFlags=0) -> bool
+        StringToValue(text, argFlags=0) -> (bool, variant)
         
         Converts text into wxVariant value appropriate for this property.
         """

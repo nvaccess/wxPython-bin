@@ -12,7 +12,7 @@
 # See: https://www.python.org/dev/peps/pep-0484/
 #      https://www.jetbrains.com/help/pycharm/2016.1/type-hinting-in-pycharm.html
 #
-# Copyright: (c) 2017 by Total Control Software
+# Copyright: (c) 2018 by Total Control Software
 # License:   wxWindows License
 #---------------------------------------------------------------------------
 
@@ -23,76 +23,10 @@ This module contains a few classes that are only available on Windows.
 #-- begin-_msw --#
 
 import wx
+
+Metafile = wx.deprecated(wx.Metafile, 'Metafile has moved to the core wx module.')
+MetafileDC = wx.deprecated(wx.MetafileDC, 'MetafileDC has moved to the core wx module.')
 #-- end-_msw --#
-#-- begin-metafile --#
-
-class Metafile(wx.Object):
-    """
-    Metafile(filename=wx.EmptyString)
-    
-    A wxMetafile represents the MS Windows metafile object, so metafile
-    operations have no effect in X.
-    """
-
-    def __init__(self, filename=wx.EmptyString):
-        """
-        Metafile(filename=wx.EmptyString)
-        
-        A wxMetafile represents the MS Windows metafile object, so metafile
-        operations have no effect in X.
-        """
-
-    def IsOk(self):
-        """
-        IsOk() -> bool
-        
-        Returns true if the metafile is valid.
-        """
-
-    def Play(self, dc):
-        """
-        Play(dc) -> bool
-        
-        Plays the metafile into the given device context, returning true if
-        successful.
-        """
-
-    def SetClipboard(self, width=0, height=0):
-        """
-        SetClipboard(width=0, height=0) -> bool
-        
-        Passes the metafile data to the clipboard.
-        """
-# end of class Metafile
-
-
-class MetafileDC(wx.DC):
-    """
-    MetafileDC(filename=wx.EmptyString)
-    
-    This is a type of device context that allows a metafile object to be
-    created (Windows only), and has most of the characteristics of a
-    normal wxDC.
-    """
-
-    def __init__(self, filename=wx.EmptyString):
-        """
-        MetafileDC(filename=wx.EmptyString)
-        
-        This is a type of device context that allows a metafile object to be
-        created (Windows only), and has most of the characteristics of a
-        normal wxDC.
-        """
-
-    def Close(self):
-        """
-        Close() -> Metafile
-        
-        This must be called after the device context is finished with.
-        """
-# end of class MetafileDC
-
-#-- end-metafile --#
 #-- begin-axbase --#
 
 class PyAxBaseWindow(wx.Window):
