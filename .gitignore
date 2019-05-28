@@ -1,3 +1,7 @@
+pubsub/
+wx/lib/pubsub/
+wx/lib/evtmgr.py
+wx/lib/foldmenu.py
 *.dist-info/
 __pycache__/
 __pycache__/
