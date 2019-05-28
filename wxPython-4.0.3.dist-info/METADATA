@@ -1,4 +1,4 @@
-Metadata-Version: 2.0
+Metadata-Version: 2.1
 Name: wxPython
 Version: 4.0.3
 Summary: Cross platform GUI toolkit for Python, "Phoenix" version
@@ -28,8 +28,8 @@ Classifier: Programming Language :: Python :: 3.5
 Classifier: Programming Language :: Python :: 3.6
 Classifier: Programming Language :: Python :: Implementation :: CPython
 Classifier: Topic :: Software Development :: User Interfaces
-Requires-Dist: PyPubSub
 Requires-Dist: six
+Requires-Dist: PyPubSub
 
 Welcome to wxPython's Project Phoenix! Phoenix is the improved next-generation
 wxPython, "better, stronger, faster than he was before." This new
